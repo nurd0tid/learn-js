@@ -868,7 +868,7 @@ ul.list-inline .list-inline-item {
 
 .top-contacts-box .profile-img {
   position: relative;
-  top: -6px;
+  /* top: -6px; */
 }
 
 .top-contacts-box .profile-img img {
