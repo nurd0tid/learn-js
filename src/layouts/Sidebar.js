@@ -12,7 +12,7 @@ function Sidebar() {
                 <div className="chat-menus">
                     <ul>
                         <li>
-                            <a href="index.html" className="chat-unread blue">
+                            <a href="/chat" className="chat-unread blue">
                                 <span className="material-icons">message</span>
                                 <span>Chats</span>
                             </a>
@@ -36,7 +36,7 @@ function Sidebar() {
                             </a>
                         </li>
                         <li>
-                            <a href="settings.html" className="chat-unread">
+                            <a href="/settings" className="chat-unread">
                                 <span className="material-icons">settings</span>
                                 <span>Settings</span>
                             </a>

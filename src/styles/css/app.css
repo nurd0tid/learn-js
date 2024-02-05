@@ -157,9 +157,9 @@ body {
   padding-left: 85px;
 }
 
-.btn {
+/* .btn {
   border-color: transparent;
-}
+} */
 
 a {
   color: #0a80ff;
@@ -1390,6 +1390,10 @@ ul.list-inline .list-inline-item {
 
 .sidebar .user-list li.item-typing {
   background-color: #F1F6FF;
+}
+
+.sidebar .user-list li.active {
+  background-color: #eaf0f9;
 }
 
 .sidebar .user-list li figure {

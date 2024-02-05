@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -6,23 +6,16 @@ import { Image } from 'react-bootstrap';
 
 SwiperCore.use([Pagination, Navigation]);
 
-function RecentChat() {
-  const avatarImages = [
-    '/assets/img/avatar/avatar-1.jpg',
-    '/assets/img/avatar/avatar-2.jpg',
-    '/assets/img/avatar/avatar-3.jpg',
-    '/assets/img/avatar/avatar-4.jpg',
-    '/assets/img/avatar/avatar-7.jpg',
-    '/assets/img/avatar/avatar-8.jpg',
-    '/assets/img/avatar/avatar-9.jpg',
-    '/assets/img/avatar/avatar-10.jpg',
-  ];
+function RecentChat(props) {
+  const {
+    recentChat
+  } = props;
 
   return (
     <>
       <div className="left-chat-title d-flex justify-content-between align-items-center">
           <div className="chat-title">
-              <h4>CHATS</h4>
+              <h4>RECENT CHATS</h4>
           </div>
           <div className="add-section">
               <ul>
@@ -37,26 +30,38 @@ function RecentChat() {
         <input className="form-control chat_input" id="search-contacts" type="text" placeholder="Search Contacts"/>
       </div>
 
+      {recentChat && recentChat.length > 0 ? (
+        <div className="top-online-contacts">
+          <Swiper
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+          >
+            {recentChat.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="top-contacts-box" style={{ marginRight: '5px', marginLeft: '5px' }}>
+                      {item.photo ? (
+                        <div className="profile-img">
+                          <Image src={`${process.env.NEXT_PUBLIC_URL}/img/users/${item?.photo}`} alt={`Avatar ${index + 1}`} style={{ maxWidth: '45px', height: '45px', marginTop: '5px' }}/>
+                        </div>
+                      ) : (
+                        <div style={{ maxWidth: '45px', height: '45px', borderRadius: '5px', color: "#420BA1", backgroundColor: "#E8DBFF", textAlign: 'center', padding: '13px', marginRight: '10px', marginLeft: '10px' }}>
+                          {item.name.slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
+                    <div className="profile-name">
+                        <span>{item.name}</span>
+                    </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      ) : (
       <div className="top-online-contacts">
-        <Swiper
-          slidesPerView={4}
-          navigation
-          pagination={{ clickable: true }}
-        >
-          {avatarImages.map((avatar, index) => (
-            <SwiperSlide key={index}>
-              <div className="top-contacts-box">
-                  <div className="profile-img online">
-                      <Image src={avatar} alt={`Avatar ${index + 1}`}/>
-                  </div>
-                  <div className="profile-name">
-                      <span>helen</span>
-                  </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <p>Not Available recent chats.</p>
       </div>
+      )}
     </>
 
   )
