@@ -110,18 +110,36 @@ function Messages(props) {
         e.preventDefault(); 
         try {
             const userId = userData.id;
-            const response = await fetch('/api/telegram/post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    roomId,
-                    userId,
-                    messages,
-                }),
-            });
-            setMessages('');
+            const type = userData.message_recieve_from;
+            const phone = userData.phone_sender;
+            if(type === 'telegram') {
+                const response = await fetch('/api/telegram/post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        roomId,
+                        userId,
+                        messages,
+                    }),
+                });
+                setMessages('');
+            }else {
+                const response = await fetch('/api/whatsapp/config', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        roomId,
+                        phone,
+                        userId,
+                        messages,
+                    }),
+                });
+                setMessages('');
+            }
         } catch (error) {
             console.error('Error sending message:', error);
         }
